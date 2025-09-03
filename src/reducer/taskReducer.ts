@@ -1,3 +1,4 @@
+
 interface Todo {
   id: number;
   text: string;
@@ -9,6 +10,12 @@ interface TaskState{
     completed:number;
     pending:number;
 }
+
+const getStats = (todos:Todo[]) =>({
+    length:todos.length,
+    completed:todos.filter(todo=>todo.completed).length,
+    pending:todos.filter(todo=>!todo.completed).length
+})
 
 export type TaskAction = 
 | {type:'ADD_TODO', payload:string}
@@ -34,22 +41,18 @@ export const taskReducer = (
 
         return {
             ...state,
-            completed:updateTodos.filter(todo=>todo.completed ).length,
-            pending:updateTodos.filter(todo=>!todo.completed).length,
             todos:updateTodos,
-            length:updateTodos.length
+           ...getStats(updateTodos)
         };
 
         }
         case 'DELETE_TODO':{
             
-            const updateTodo = state.todos.filter((todo) => todo.id != action.payload)
+            const updateTodos = state.todos.filter((todo) => todo.id != action.payload)
             return {
                 ...state,
-                completed:updateTodo.filter(todo=>todo.completed).length,
-                pending:updateTodo.filter(todo=>!todo.completed).length,
-                todos: updateTodo,
-                length:updateTodo.length,
+                todos: updateTodos,
+                ...getStats(updateTodos)
             }
         }
         case 'TOGGLE_TODO':{
@@ -64,9 +67,7 @@ export const taskReducer = (
             return {
                 ...state,
                 todos:updateTodos,
-                completed:updateTodos.filter(todo=>todo.completed).length,
-                pending:updateTodos.filter(todo=>!todo.completed).length,
-                length:updateTodos.length
+                ...getStats(updateTodos)
             }
         }
 
