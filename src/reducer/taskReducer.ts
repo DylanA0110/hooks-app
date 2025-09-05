@@ -22,6 +22,15 @@ export type TaskAction =
 | {type:'TOGGLE_TODO', payload:number}
 | {type:'DELETE_TODO', payload:number}
 
+export const getTaskInitialState = ():TaskState =>{
+    return {
+        todos:[],
+        length:0,
+        completed:0,
+        pending:0,
+    }
+}
+
 //Un reducer no es mas que una funcion pura que debe regresar un estado
 export const taskReducer = (
     state:TaskState, 
