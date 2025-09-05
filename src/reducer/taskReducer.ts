@@ -1,4 +1,5 @@
 
+
 interface Todo {
   id: number;
   text: string;
@@ -23,12 +24,20 @@ export type TaskAction =
 | {type:'DELETE_TODO', payload:number}
 
 export const getTaskInitialState = ():TaskState =>{
-    return {
-        todos:[],
-        length:0,
-        completed:0,
-        pending:0,
+
+    const localStorageState = localStorage.getItem('task-state');
+
+    if(!localStorageState)
+    {
+        return {
+            todos:[],
+            length:0,
+            completed:0,
+            pending:0,
+        }
     }
+    //!el objeto puede haber sido manipulado
+    return JSON.parse(localStorageState);
 }
 
 //Un reducer no es mas que una funcion pura que debe regresar un estado
