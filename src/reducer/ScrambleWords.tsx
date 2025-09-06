@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { SkipForward, Play } from 'lucide-react';
+import conffetti from 'canvas-confetti'
+import confetti from 'canvas-confetti';
 
 const GAME_WORDS = [
   'REACT',
@@ -61,6 +63,11 @@ export const ScrambleWords = () => {
     e.preventDefault();
     // Implementar lógica de juego
     if(guess === currentWord){
+        confetti({
+            particleCount:100,
+            spread:120,
+            origin:{y:0.6}
+        })
         setPoints(prev => prev+1)
         const newWords = words.slice(1);
         setWords(newWords);
