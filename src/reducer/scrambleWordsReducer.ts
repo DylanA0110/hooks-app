@@ -1,4 +1,4 @@
-import { ScrambleWords } from "./ScrambleWords";
+
 export interface ScrambleWordState {
   currentWord: string;
   errorCounter: number;
