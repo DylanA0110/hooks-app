@@ -3,7 +3,8 @@ import { createRoot } from "react-dom/client";
 //import { HooksApp } from './HooksApp'
 import "./index.css";
 // import { MemoHook } from "./06-memo/MemoHook";
-import { MemoCounter } from "./06-memo/MemoCounter";
+// import { MemoCounter } from "./06-memo/MemoCounter";
+import { InstagromApp } from "./07-useOptimistic/InstagromApp";
 //import { TrafficLightWithHook } from './02-useEffect/TrafficLightWithHook'
 // import { PokemonPage } from './03-examples/PokemonPage'
 // import { TasksApp } from './05-useReducer/TaskApp'
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")!).render(
     {/* <TasksApp/> */}
     {/* <ScrambleWords/> */}
     {/* <MemoHook /> */}
-    <MemoCounter/>
+    {/* <MemoCounter/> */}
+    <InstagromApp/>
   </StrictMode>
 );
