@@ -1,45 +1,43 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from "react";
 
-import { Plus, Trash2, Check } from 'lucide-react';
+import { Plus, Trash2, Check } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getTaskInitialState, taskReducer } from '@/reducer/taskReducer';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getTaskInitialState, taskReducer } from "@/reducer/taskReducer";
 
 export const TasksApp = () => {
   // const [todos, setTodos] = useState<Todo[]>([]);
-  const [inputValue, setInputValue] = useState('');
-  const [state,dispatch] = useReducer( taskReducer, getTaskInitialState() );
+  const [inputValue, setInputValue] = useState("");
+  const [state, dispatch] = useReducer(taskReducer, getTaskInitialState());
 
-  useEffect(()=>{
-    localStorage.setItem('task-state', JSON.stringify(state));
-    
-  },[state])
+  useEffect(() => {
+    localStorage.setItem("task-state", JSON.stringify(state));
+  }, [state]);
 
   const addTodo = () => {
-    if(inputValue.length===0) return;
-    dispatch({type:'ADD_TODO', payload:inputValue})
-    setInputValue('');
+    if (inputValue.length === 0) return;
+    dispatch({ type: "ADD_TODO", payload: inputValue });
+    setInputValue("");
   };
 
   const toggleTodo = (id: number) => {
-     dispatch({type:'TOGGLE_TODO', payload:id});
+    dispatch({ type: "TOGGLE_TODO", payload: id });
   };
 
   const deleteTodo = (id: number) => {
-    dispatch({type:'DELETE_TODO', payload:id});
+    dispatch({ type: "DELETE_TODO", payload: id });
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if(e.key==='Enter') {
-        addTodo();
+    if (e.key === "Enter") {
+      addTodo();
     }
-
   };
 
-    const{todos, completed:completedCount,length:totalCount} = state;
+  const { todos, completed: completedCount, length: totalCount } = state;
   // const completedCount = todos.filter((todo) => todo.completed).length;
   // const totalCount = todos.length;
 
@@ -123,8 +121,8 @@ export const TasksApp = () => {
                     key={todo.id}
                     className={`flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 ${
                       todo.completed
-                        ? 'bg-slate-50 border-slate-200'
-                        : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm'
+                        ? "bg-slate-50 border-slate-200"
+                        : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm"
                     }`}
                   >
                     <Checkbox
@@ -135,8 +133,8 @@ export const TasksApp = () => {
                     <span
                       className={`flex-1 transition-all duration-200 ${
                         todo.completed
-                          ? 'text-slate-500 line-through'
-                          : 'text-slate-800'
+                          ? "text-slate-500 line-through"
+                          : "text-slate-800"
                       }`}
                     >
                       {todo.text}

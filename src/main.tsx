@@ -25,6 +25,6 @@ createRoot(document.getElementById("root")!).render(
     {/* <ScrambleWords/> */}
     {/* <MemoHook /> */}
     {/* <MemoCounter/> */}
-    <InstagromApp/>
-  </StrictMode>
+    <InstagromApp />
+  </StrictMode>,
 );

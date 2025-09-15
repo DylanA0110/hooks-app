@@ -13,7 +13,7 @@ const heavyStuff = (iterationNumber: number) => {
 
 export const MemoCounter = () => {
   const { count, increment } = useCounter(40_000);
-  const myHeavyValue = useMemo(()=>heavyStuff(count),[count]);
+  const myHeavyValue = useMemo(() => heavyStuff(count), [count]);
   return (
     <div className="bg-gradient flex flex-col gap-4">
       <h1 className="text-2xl font-bold">Memo - useMemo-{myHeavyValue}</h1>

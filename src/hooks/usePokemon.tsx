@@ -1,47 +1,44 @@
 import { useEffect, useState } from "react";
 
-interface Pokemon{
-    id: number;
-    name: string;
-    imageUrl: string;
+interface Pokemon {
+  id: number;
+  name: string;
+  imageUrl: string;
 }
 
-interface Props{
-    id: number;
+interface Props {
+  id: number;
 }
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const usePokemon = ({ id }: Props) => {
+  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [pokemon, setPokemon] = useState<Pokemon | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+  const getPokemonById = async (id: number) => {
+    setIsLoading(true);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const data = await response.json();
 
-    const getPokemonById = async(id:number) =>{
-        setIsLoading(true);
-       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-       const data = await response.json();
-       
-        await sleep(200);
+    await sleep(200);
 
-       setPokemon({
-        id: data.id,
-        name: data.name,
-        imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-       })
-       setIsLoading(false);
-    }
+    setPokemon({
+      id: data.id,
+      name: data.name,
+      imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+    });
+    setIsLoading(false);
+  };
 
-    useEffect(() => {
-        getPokemonById(id);
-    }, [id]);
+  useEffect(() => {
+    getPokemonById(id);
+  }, [id]);
 
   return {
     //Properties
     isLoading,
     pokemon,
-    formattedId:id.toString().padStart(3,'0')
-    
-  }
-}
-
+    formattedId: id.toString().padStart(3, "0"),
+  };
+};

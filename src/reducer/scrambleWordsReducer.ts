@@ -1,4 +1,3 @@
-
 export interface ScrambleWordState {
   currentWord: string;
   errorCounter: number;
@@ -17,7 +16,7 @@ export type ScrambleWordsActions =
   | { type: "SET_GUESS"; payload: string }
   | { type: "CHECK_ANSWER" }
   | { type: "SKIP_WORD" }
-  | {type:'START_NEW_GAME', payload:ScrambleWordState}
+  | { type: "START_NEW_GAME"; payload: ScrambleWordState };
 
 const GAME_WORDS = [
   "REACT",
@@ -72,7 +71,7 @@ export const getInitialState = () => {
 
 export const scrambleWordsReducer = (
   state: ScrambleWordState,
-  actioin: ScrambleWordsActions
+  actioin: ScrambleWordsActions,
 ): ScrambleWordState => {
   switch (actioin.type) {
     case "SET_GUESS":
@@ -113,8 +112,8 @@ export const scrambleWordsReducer = (
       };
     }
 
-    case"START_NEW_GAME":{
-      return actioin.payload
+    case "START_NEW_GAME": {
+      return actioin.payload;
     }
 
     default:
