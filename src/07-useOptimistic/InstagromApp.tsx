@@ -28,7 +28,7 @@ export const InstagromApp = () => {
           optimistic: true,
         },
       ];
-    },
+    }
   );
 
   const handleAddComment = async (formData: FormData) => {
