@@ -7,7 +7,6 @@ interface Comment {
 }
 
 let lastId = 2;
-
 export const InstagromApp = () => {
   const [isPending, startTransition] = useTransition();
 
