@@ -1,11 +1,13 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 //import { HooksApp } from './HooksApp'
 import "./index.css";
 // import { MemoHook } from "./06-memo/MemoHook";
 // import { MemoCounter } from "./06-memo/MemoCounter";
-import { InstagromApp } from "./07-useOptimistic/InstagromApp";
-import { Toaster} from 'sonner'
+// import { InstagromApp } from "./07-useOptimistic/InstagromApp";
+import { Toaster } from "sonner";
+import { ClientInformation } from "./08-use-suspense/ClientInformation";
+import { getUserAction } from "./08-use-suspense/api/get-user.action";
 //import { TrafficLightWithHook } from './02-useEffect/TrafficLightWithHook'
 // import { PokemonPage } from './03-examples/PokemonPage'
 // import { TasksApp } from './05-useReducer/TaskApp'
@@ -16,7 +18,7 @@ import { Toaster} from 'sonner'
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Toaster/>
+    <Toaster />
     {/* <HooksApp/> */}
     {/* <TrafficLight /> */}
     {/* <TrafficLightWithEffect /> */}
@@ -27,6 +29,15 @@ createRoot(document.getElementById("root")!).render(
     {/* <ScrambleWords/> */}
     {/* <MemoHook /> */}
     {/* <MemoCounter/> */}
-    <InstagromApp />
-  </StrictMode>,
+    {/* <InstagromApp /> */}
+    <Suspense
+      fallback={
+        <div className="bg-gradient flex flex-col">
+          <h1 className="text-2xl">Loading...</h1>
+        </div>
+      }
+    >
+      <ClientInformation getUser={getUserAction(1000)} />
+    </Suspense>
+  </StrictMode>
 );
