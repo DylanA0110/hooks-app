@@ -2,13 +2,13 @@
 // Es necesario componentes de Shadcn/ui
 // https://ui.shadcn.com/docs/installation/vite
 
-import { useEffect, useReducer } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { SkipForward, Play } from "lucide-react";
-import confetti from "canvas-confetti";
-import { getInitialState, scrambleWordsReducer } from "./scrambleWordsReducer";
+import { useEffect, useReducer } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
+import { SkipForward, Play } from 'lucide-react';
+import confetti from 'canvas-confetti';
+import { getInitialState, scrambleWordsReducer } from './scrambleWordsReducer';
 
 export const ScrambleWords = () => {
   const [state, dispatch] = useReducer(scrambleWordsReducer, getInitialState());
@@ -40,19 +40,19 @@ export const ScrambleWords = () => {
   const handleGuessSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch({
-      type: "CHECK_ANSWER",
+      type: 'CHECK_ANSWER',
     });
   };
 
   const handleSkip = () => {
     dispatch({
-      type: "SKIP_WORD",
+      type: 'SKIP_WORD',
     });
   };
 
   const handlePlayAgain = () => {
     dispatch({
-      type: "START_NEW_GAME",
+      type: 'START_NEW_GAME',
       payload: getInitialState(),
     });
   };
@@ -110,13 +110,13 @@ export const ScrambleWords = () => {
               </h2>
 
               <div className="flex justify-center gap-2 mb-6">
-                {scrambledWord.split("").map((letter, index) => (
+                {scrambledWord.split('').map((letter, index) => (
                   <div
                     key={index}
                     className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
                     style={{
                       animationDelay: `${index * 0.1}s`,
-                      animation: "fadeInUp 0.6s ease-out forwards",
+                      animation: 'fadeInUp 0.6s ease-out forwards',
                     }}
                   >
                     {letter}
@@ -141,7 +141,7 @@ export const ScrambleWords = () => {
                     value={guess}
                     onChange={(e) =>
                       dispatch({
-                        type: "SET_GUESS",
+                        type: 'SET_GUESS',
                         payload: e.target.value,
                       })
                     }
@@ -206,7 +206,7 @@ export const ScrambleWords = () => {
             Desafíate con palabras desordenadas!
             <br />
             <br />
-            {words.join(", ")}
+            {words.join(', ')}
           </p>
         </div>
       </div>
